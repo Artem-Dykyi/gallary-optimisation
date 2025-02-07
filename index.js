@@ -66,11 +66,10 @@ const galleryItems = [
 
 
 const galleryList = document.querySelector(".js-gallery");
-const lightbox = document.querySelector(".js-lightbox");
-const overlay = document.querySelector(".lightbox__overlay");
+const modal = document.querySelector(".js-lightbox");
 const closeBtn = document.querySelector(`[data-action="close-lightbox"]`);
-const image = document.querySelector(".lightbox__image");
-// const item = document.querySelector(".gallery__item");
+const img = document.querySelector(".lightbox__image");
+
 
 galleryItems.forEach(({preview, original, description}) => {
     galleryList.insertAdjacentHTML("beforeend",`<li class="gallery__item">
@@ -89,15 +88,14 @@ galleryItems.forEach(({preview, original, description}) => {
     if (event.target === galleryList) {
       return;
     }
-    image.src = event.target.dataset.source;
-    image.alt = event.target.alt;
-    lightbox.classList.toggle("is-open");
+    modal.classList.toggle("is-open");
+    img.src = event.target.dataset.source;
+    img.alt = event.target.alt;
   });
   
-  closeBtn.addEventListener("click", closeModal);
 
-  function closeModal() {
-    lightbox.classList.toggle("is-open");
-    image.src = "";
-    image.alt = "";
-  }
+  closeBtn.addEventListener("click", () => {
+    modal.classList.toggle("is-open");
+    img.src = "";
+    img.alt = "";
+  });
